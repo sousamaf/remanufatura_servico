@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/resources/templates/templatepadrao.xhtml">
+	<ui:define name="content">
+	<h:form>
+		<span id="titulo">
+			<h4>#{msg.cadastro_titulo}</h4>
+		</span>
+		<hr/>
+		<h:panelGrid columns="3">
+			
+			<h:outputText id="txNome" value="Nome:" for="nome"></h:outputText>
+			<h:inputText id="nome" label="Nome" value="#{Pessoa.contato.name}" required="true" requiredMessage="Insira seu nome."></h:inputText>
+			<h:message for="nome"></h:message>
+			
+			
+			<h:outputText id="txEmail" value="Email:" for="email"></h:outputText>
+			<h:inputText id="email" label="Email" value="#{Pessoa.contato.email}" required="false" validatorMessage="Email inválido"><f:validateRegex pattern="[a-z0-9\-\_\.]+@[a-z0-9\-\_\.]+[.]{1}[a-z]{2,3}"/></h:inputText>
+			<h:message for="email"></h:message>
+			
+			
+			<h:outputText id="txSenha" value="Senha:" for="senha"></h:outputText>
+			<h:inputText id="senha" label="Senha" value="#{Pessoa.contato.password}" required="true" requiredMessage="Digite sua senha."></h:inputText>
+			<h:message for="senha"></h:message>
+			
+			
+			<h:outputText id="txConfirmaSenha" value="Confirme a senha:" for="confirmasenha"></h:outputText>
+			<h:inputText id="confirmasenha" label="Confirmasenha" value="#{Pessoa.confirmasenha}" required="true" requiredMessage="Confirme sua senha."></h:inputText>
+			<h:message for="confirmasenha"></h:message>
+			
+			
+			<h:outputText></h:outputText> <h:commandButton action="#{Pessoa.atualizar}" value="Alterar">
+			</h:commandButton>
+		</h:panelGrid>
+	</h:form>
+	<h:form>
+		<h:commandLink action="index" value="Retornar à página principal"></h:commandLink>
+	</h:form>
+	</ui:define>
+</ui:composition>
+</html>

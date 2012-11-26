@@ -4,7 +4,7 @@ public class Movimentacao_caixa {
 
 	int codigo;
 	double entrada;
-	double saidada;
+	double saida;
 	Funcionario funcionario;
 	Caixa caixa;
 	Contas_Receber conta_receber;
@@ -16,13 +16,13 @@ public class Movimentacao_caixa {
 		
 	}
 	
-	public Movimentacao_caixa(int codigo, double entrada, double saidada,
+	public Movimentacao_caixa(int codigo, double entrada, double saida,
 			Funcionario funcionario, Caixa caixa, Contas_Receber conta_receber,
 			Contas_Pagar conta_pagar) {
 		super();
 		this.codigo = codigo;
 		this.entrada = entrada;
-		this.saidada = saidada;
+		this.saida = saida;
 		this.funcionario = funcionario;
 		this.caixa = caixa;
 		this.conta_receber = conta_receber;
@@ -54,16 +54,16 @@ public class Movimentacao_caixa {
 		this.entrada = entrada;
 	}
 	/**
-	 * @return the saidada
+	 * @return the saida
 	 */
-	public double getSaidada() {
-		return saidada;
+	public double getSaida() {
+		return saida;
 	}
 	/**
 	 * @param saidada the saidada to set
 	 */
-	public void setSaidada(double saidada) {
-		this.saidada = saidada;
+	public void setSaida(double saida) {
+		this.saida = saida;
 	}
 	/**
 	 * @return the funcionario

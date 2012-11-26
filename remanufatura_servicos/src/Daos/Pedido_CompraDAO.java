@@ -8,32 +8,32 @@
 	package Daos;
 
 	
-	import java.sql.ResultSet;
+import Conexao.Conexao;
+import Bens.Pedido_Compra;
+import Bens.Uf;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import Bens.Uf;
-import Conexao.Conexao;
-
-	public class CidadeDAO
+	public class Pedido_CompraDAO
 	{
 	  @SuppressWarnings("finally")
-	public boolean excluir(Uf uf)
+	public boolean excluir(Pedido_Compra pedido_compra)
 	  {
 	    boolean res = false;
 	    Conexao con = new Conexao();
-	    String query = "DELETE FROM uf  WHERE uf=?";
+	    String query = "DELETE FROM Pedido_Compra  WHERE fornecedor=?";
 	    
 	    con.preparar(query);
 	    try
 	    {
-	      con.getPstmt().setString(1, uf.getUf());
+	      con.getPstmt().setInt(1, pedido_compra.getFornecedor().getCodigo());
 	      res = con.executeUpdate();
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(Pedido_CompraDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {
@@ -42,21 +42,21 @@ import Conexao.Conexao;
 	    }
 	  }
 	  @SuppressWarnings("finally")	  
-	  public boolean inserir(Uf uf)
+	  public boolean inserir(Pedido_Compra pedido)
 	  {
 	    boolean res = false;
 	    Conexao con = new Conexao();
-	    String query = "INSERT INTO uf (uf, estado) VALUES (?, ?)";
+	    String query = "INSERT INTO pedido (fornecedor, entrada_produto) VALUES (?, ?)";
 	    
 	    con.preparar(query);
 	    try
 	    {
-	      con.getPstmt().setString(1, uf.getUf());
-	      con.getPstmt().setString(2, uf.getEstado());
+	      con.getPstmt().setInt(1, pedido.getFornecedor().getCodigo());
+	      con.getPstmt().setInt(2, pedido.getEntrada_produto().getCodigo());
 	      res = con.executeUpdate();
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(Pedido_CompraDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {
@@ -65,22 +65,22 @@ import Conexao.Conexao;
 	    }
 	  }
 	  @SuppressWarnings("finally")
-	  public boolean atualizar(Uf ufatual, Uf ufnova)
+	  public boolean atualizar(Pedido_Compra pedidoatual, Pedido_Compra pedidonova)
 	  {
 	    boolean res = false;
 	    Conexao con = new Conexao();
-	    String query = "UPDATE Uf SET uf=?, estado=? WHERE uf=?";
+	    String query = "UPDATE Pedido_Compra SET fornecedor=?, entrada_produto=? WHERE fornecedor=?";
 	    
 	    con.preparar(query);
 	    try
 	    {
-	      con.getPstmt().setString(1, ufnova.getUf());
-	      con.getPstmt().setString(2, ufnova.getEstado());
-	      con.getPstmt().setString(3, ufatual.getUf());
-	      res = con.executeUpdate();
+	      con.getPstmt().setInt(1, pedidonova.getFornecedor().getCodigo());
+	      con.getPstmt().setInt(2, pedidonova.getEntrada_produto().getCodigo());
+	      con.getPstmt().setInt(3, pedidoatual.getFornecedor().getCodigo());
+	    		  res = con.executeUpdate();
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(Pedido_CompraDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {
@@ -90,11 +90,11 @@ import Conexao.Conexao;
 	  }
 	  
 	  @SuppressWarnings("finally")
-	public ArrayList<Uf> buscar()
+	public ArrayList<Pedido_Compra> buscar()
 	  {
-	    ArrayList<Uf> res = new ArrayList<Uf>();
+	    ArrayList<Pedido_Compra> res = new ArrayList<Pedido_Compra>();
 	    Conexao con = new Conexao();
-	    String query = "SELECT uf, estado FROM uf ORDER BY uf";
+	    String query = "SELECT fornecedor, entrada_produto FROM Pedido_Compra ORDER BY Pedido_Compra";
 	    
 	    con.preparar(query);
 	    try
@@ -102,14 +102,14 @@ import Conexao.Conexao;
 	      ResultSet rs = con.getPstmt().executeQuery();
 	      while (rs.next())
 	      {
-	        Uf uf = new Uf();
-	        uf.setUf(rs.getString("uf"));
-	        uf.setEstado(rs.getString("estado"));
-	        res.add(uf);
+	       Pedido_Compra pedido = new Pedido_Compra();
+	      //  pedido.setFornecedor(rs.getInt("fornecedor"));
+	       // pedido.setEntrada_produto((rs.getInt("estado"));
+	        res.add(pedido);
 	      }
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(UfDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {
@@ -137,7 +137,7 @@ import Conexao.Conexao;
 	      }
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(UfDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {
@@ -166,7 +166,7 @@ import Conexao.Conexao;
 	      }
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(UfDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {

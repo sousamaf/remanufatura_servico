@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/resources/templates/templatepadrao.xhtml">
+	<ui:define name="content">
+	<h:form>
+		<span id="titulo">
+			<h4>#{msg.cadastro_titulo}</h4>
+		</span>
+		<hr/>
+		<h:panelGrid columns="3">
+			
+			<h:outputText id="txNome" value="Nome:" for="nome"></h:outputText>
+			<h:inputText id="nome" label="Nome" value="#{Bens.Pessoa.nome}" required="true" requiredMessage="Insira seu nome."></h:inputText>
+			<h:message for="nome"></h:message>
+			
+			<h:outputText id="txEndereco" value="Endereco:" for="Endereco"></h:outputText>
+			<h:inputText id="endereco" label="endereco" value="#{Bens.Pessoa.endereco}" required="true" requiredMessage="Digite sua senha."></h:inputText>
+			<h:message for="endereco></h:message>
+			
+			<h:outputText id="txEmail" value="Email:" for="email"></h:outputText>
+			<h:inputText id="email" label="Email" value="#{Bens.Pessoa.email}" required="false" validatorMessage="Email inválido"><f:validateRegex pattern="[a-z0-9\-\_\.]+@[a-z0-9\-\_\.]+[.]{1}[a-z]{2,3}"/></h:inputText>
+			<h:message for="email"></h:message>
+			
+			
+			<h:outputText id="txTelefone" value="Telefone:" for="Telefone"></h:outputText>
+			<h:inputText id="telefone" label="telefone" value="#{Bens.Pessoa.telefone}" required="true" requiredMessage="Digite sua senha."></h:inputText>
+			<h:message for="telefone></h:message>
+			
+			
+			<h:outputText id="txDataCadastro" value=" Data de Cadatro:" for="cadastro"></h:outputText>
+			<h:inputText id="cadastro" label="DtCadastro" value="#{Bens.Pessoa.data_cadastro}" required="true" requiredMessage="Confirme sua senha."></h:inputText>
+			<h:message for="cadastro"></h:message>
+			
+			
+			<h:outputText></h:outputText> <h:commandButton action="#{Pessoa.salvar}" value="Salvar"></h:commandButton>
+		</h:panelGrid>
+	</h:form>
+	<h:form>
+		<h:commandLink action="index" value="Retornar à página principal"></h:commandLink>
+	</h:form>
+	</ui:define>
+</ui:composition>
+</html>

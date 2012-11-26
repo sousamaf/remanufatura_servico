@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/interna.xhtml">
+
+	<ui:define name="titulo">
+    	Controle de Pessoas
+	</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="cadastro">
+			<h:messages />
+			<h:inputHidden value="#{PessoaBean.Pessoa.id_Pessoa}" />
+			
+
+	<h:panelGrid columns="3">
+			
+		<h:outputText id="txtNome" value="Nome:" for="nome"></h:outputText>
+		<h:inputText id="nome" label="Nome:" value="#{PessoaBean.Pessoa.nome}" size="30" maxlength="30" required="true" redisplay="true" requiredMessage="Insira nome" validatorMessage="Nome deve conter no minimo 10 caracters">
+		<f:validateLength minimum="10" maximum="30" /></h:inputText>
+		<h:message errorStyle="color:red; display:block" for="nome"></h:message>
+		
+		<h:outputLabel id="txtCpf" value="CPF:" for="cpf"></h:outputLabel>
+		<h:inputText id="cpf" label="CPF:" value="#{PessoaBean.Pessoa.cpf}" size="10" /> 
+		<h:message errorStyle="color:red; display:block" for="cpf"></h:message>
+			
+		
+		<h:outputLabel value="Sexo:" for="sexo" />
+			<h:selectOneMenu id="sexo" value="#{PessoaBean.Pessoa.sexo}">
+				<f:selectItem itemValue="M" itemLabel="Masculino" />
+				<f:selectItem itemValue="F" itemLabel="Feminino" />
+			</h:selectOneMenu>
+	</h:panelGrid>
+	
+<!-- 		
+		<h:outputLabel id="txtDataEntrada" value="Data Entrada:" for="data_entrada" />
+		<p:calendar label="Data Entrada" value="#{PessoaBean.Pessoa.data_entrada}" size="10" maxlength="10" required="true" requiredMessage="Digite sua data de entrada">
+    	<f:convertDateTime pattern="d/M/yyyy" /></p:calendar>
+		<h:message errorStyle="color:red; display:block" for="data_entrada"></h:message>
+
+
+		<h:outputText id="txtMatricula" value="Matricula:" for="matricula"></h:outputText>
+		<h:inputText id="matricula" label="Matricula:" value="#{PessoaBean.Pessoa.id_matricula}" size="15" maxlength="15" required="true" redisplay="true" requiredMessage="Insira a matricula">
+		<f:validateLength minimum="10" maximum="30" /></h:inputText>
+		<h:message errorStyle="color:red; display:block" for="matricula"></h:message>
+ -->
+<h:panelGrid columns="3">
+		<h:outputLabel id="txtCelular" value="Celular:" for="celular"></h:outputLabel>
+		<h:inputText id="celular" label="Celular:" value="#{PessoaBean.Pessoa.celular}" size="10" /> 
+		<h:message errorStyle="color:red; display:block" for="celular"></h:message>
+
+		<h:outputText id="txtEmail" value="E-mail:" for="email"></h:outputText>
+		<h:inputText id="email" label="E-mail:" value="#{usuarioBean.usuario.email}" size="50" maxlength="50" required="false" validatorMessage="Insira e-mail correto"><f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+"></f:validateRegex></h:inputText>
+		<h:message errorStyle="color:red; display:block" for="email"></h:message>
+	 
+
+		<h:outputText id="txtSenha" value="Senha:" for="senha"></h:outputText>
+		<h:inputSecret id="senha" label="Senha:" value="#{usuarioBean.usuario.senha}" size="10" maxlength="10" required="true" redisplay="true" requiredMessage="Digite senha" validatorMessage="senha deve conter no minimo 4 caracters"><f:validateRegex pattern="[a-zA-Z0-9\-\_\.]{4,4}"/></h:inputSecret>
+		<h:message errorStyle="color:red; display:block" for="senha"></h:message>
+		
+		<h:outputText id="txConfirmaSenha" value="Confirme a senha:" for="confirmasenha"></h:outputText>
+		<h:inputSecret id="confirmasenha" label="Confirmasenha" value="#{usuarioBean.confirmarSenha}" size="10" maxlength="10" redisplay="true" required="true" requiredMessage="Confirme sua senha."></h:inputSecret>
+		<h:message errorStyle="color:red; display:block" for="confirmasenha"></h:message>
+
+			</h:panelGrid>
+
+			<h:commandButton action="#{PessoaBean.salvar}" value="Salvar" />
+			<br></br>
+			<br></br>
+			<h:commandLink action="/templates/principal" value="Retornar"></h:commandLink>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

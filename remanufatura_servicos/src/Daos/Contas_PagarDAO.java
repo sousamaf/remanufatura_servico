@@ -8,16 +8,15 @@
 	package Daos;
 
 	
-	import java.sql.ResultSet;
+	import Conexao.Conexao;
+import Bens.Uf;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import Bens.Uf;
-import Conexao.Conexao;
-
-	public class CidadeDAO
+	public class Contas_PagarDAO
 	{
 	  @SuppressWarnings("finally")
 	public boolean excluir(Uf uf)
@@ -33,7 +32,7 @@ import Conexao.Conexao;
 	      res = con.executeUpdate();
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(Contas_PagarDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {
@@ -56,7 +55,7 @@ import Conexao.Conexao;
 	      res = con.executeUpdate();
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(Contas_PagarDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {
@@ -80,7 +79,7 @@ import Conexao.Conexao;
 	      res = con.executeUpdate();
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(Contas_PagarDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {
@@ -109,7 +108,7 @@ import Conexao.Conexao;
 	      }
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(Contas_PagarDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {
@@ -137,7 +136,7 @@ import Conexao.Conexao;
 	      }
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(Contas_PagarDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {
@@ -166,7 +165,7 @@ import Conexao.Conexao;
 	      }
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(Contas_PagarDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {

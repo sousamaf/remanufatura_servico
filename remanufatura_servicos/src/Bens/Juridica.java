@@ -1,5 +1,6 @@
 package Bens;
-import java.util.*; class Juridica {
+import java.util.*;
+public class Juridica {
 	int Cnpj;
 	int IE;
 	String nome_fantasia;

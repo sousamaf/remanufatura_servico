@@ -8,32 +8,31 @@
 	package Daos;
 
 	
-	import java.sql.ResultSet;
+import Conexao.Conexao;
+import Bens.Situacao;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import Bens.Uf;
-import Conexao.Conexao;
-
-	public class CidadeDAO
+	public class SituacaoDAO
 	{
 	  @SuppressWarnings("finally")
-	public boolean excluir(Uf uf)
+	public boolean excluir(Situacao codigo)
 	  {
 	    boolean res = false;
 	    Conexao con = new Conexao();
-	    String query = "DELETE FROM uf  WHERE uf=?";
+	    String query = "DELETE FROM codigo  WHERE codigo=?";
 	    
 	    con.preparar(query);
 	    try
 	    {
-	      con.getPstmt().setString(1, uf.getUf());
+	      con.getPstmt().setInt(1, codigo.getCodigo());
 	      res = con.executeUpdate();
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(SituacaoDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {
@@ -42,21 +41,21 @@ import Conexao.Conexao;
 	    }
 	  }
 	  @SuppressWarnings("finally")	  
-	  public boolean inserir(Uf uf)
+	  public boolean inserir(Situacao codigo)
 	  {
 	    boolean res = false;
 	    Conexao con = new Conexao();
-	    String query = "INSERT INTO uf (uf, estado) VALUES (?, ?)";
+	    String query = "INSERT INTO Situacao (codigo, tipo) VALUES (?, ?)";
 	    
 	    con.preparar(query);
 	    try
 	    {
-	      con.getPstmt().setString(1, uf.getUf());
-	      con.getPstmt().setString(2, uf.getEstado());
+	      con.getPstmt().setInt(1, codigo.getCodigo());
+	      con.getPstmt().setString(2, codigo.getTipo());
 	      res = con.executeUpdate();
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(SituacaoDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {
@@ -65,22 +64,22 @@ import Conexao.Conexao;
 	    }
 	  }
 	  @SuppressWarnings("finally")
-	  public boolean atualizar(Uf ufatual, Uf ufnova)
+	  public boolean atualizar(Situacao situacaoatual, Situacao situacaonova)
 	  {
 	    boolean res = false;
 	    Conexao con = new Conexao();
-	    String query = "UPDATE Uf SET uf=?, estado=? WHERE uf=?";
+	    String query = "UPDATE Situacao SET codigo=?, tipo=? WHERE codigo=?";
 	    
 	    con.preparar(query);
 	    try
 	    {
-	      con.getPstmt().setString(1, ufnova.getUf());
-	      con.getPstmt().setString(2, ufnova.getEstado());
-	      con.getPstmt().setString(3, ufatual.getUf());
+	      con.getPstmt().setInt(1, situacaonova.getCodigo());
+	      con.getPstmt().setString(2, situacaonova.getTipo());
+	      con.getPstmt().setInt(3, situacaoatual.getCodigo());
 	      res = con.executeUpdate();
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(SituacaoDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {
@@ -90,11 +89,11 @@ import Conexao.Conexao;
 	  }
 	  
 	  @SuppressWarnings("finally")
-	public ArrayList<Uf> buscar()
+	public ArrayList<Situacao> buscar() // busca por qual quer um
 	  {
-	    ArrayList<Uf> res = new ArrayList<Uf>();
+	    ArrayList<Situacao> res = new ArrayList<Situacao>();
 	    Conexao con = new Conexao();
-	    String query = "SELECT uf, estado FROM uf ORDER BY uf";
+	    String query = "SELECT codigo, tipo FROM codigo ORDER BY codigo";
 	    
 	    con.preparar(query);
 	    try
@@ -102,14 +101,14 @@ import Conexao.Conexao;
 	      ResultSet rs = con.getPstmt().executeQuery();
 	      while (rs.next())
 	      {
-	        Uf uf = new Uf();
-	        uf.setUf(rs.getString("uf"));
-	        uf.setEstado(rs.getString("estado"));
-	        res.add(uf);
+	    	  Situacao situacao = new Situacao();
+	        situacao.setCodigo(rs.getInt("codigo"));
+	        situacao.setTipo(rs.getString("Tipo"));
+	        res.add(situacao);
 	      }
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(SituacaoDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {
@@ -118,26 +117,26 @@ import Conexao.Conexao;
 	    }
 	  }
 	  @SuppressWarnings("finally")
-	  public Uf buscar(String uf)
+	  public Situacao buscar(String tipo)
 	  {
-	    Uf res = null;
+		  Situacao res = null;
 	    Conexao con = new Conexao(); //Abrindo Conecção
-	    String query = "SELECT uf, estado FROM uf WHERE uf=?";
+	    String query = "SELECT codigo, tipo FROM tipo WHERE tipo=?";
 	    
 	    con.preparar(query);
 	    try
 	    {
-	      con.getPstmt().setString(1, uf);
+	      con.getPstmt().setString(1, tipo);
 	      ResultSet rs = con.getPstmt().executeQuery();
 	      if (rs.next()) // passa para proxima linha do rs.net "tabela de resultados
 	      {
-	        res = new Uf();
-	        res.setUf(rs.getString("uf"));
-	        res.setEstado(rs.getString("estado"));
+	        res = new Situacao();
+	        res.setCodigo(rs.getInt("Codigo"));
+	        res.setTipo(rs.getString("Tipo"));
 	      }
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(SituacaoDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {
@@ -147,26 +146,26 @@ import Conexao.Conexao;
 	  }
 	  
 	  @SuppressWarnings("finally")
-	public Uf buscarPorEstado(String estado)
+	public Situacao buscarPorCodigo(String codigo)
 	  {
-	    Uf res = null;
+		  Situacao res = null;
 	    Conexao con = new Conexao();
-	    String query = "SELECT uf, estado FROM uf WHERE estado LIKE ?";
+	    String query = "SELECT codigo, tipo FROM codigo WHERE codigo LIKE ?";
 	    
 	    con.preparar(query);
 	    try
 	    {
-	      con.getPstmt().setString(1, "%"+estado+"%");
+	      con.getPstmt().setString(1, "%"+codigo+"%");
 	      ResultSet rs = con.getPstmt().executeQuery();
 	      if (rs.next())
 	      {
-	        res = new Uf();
-	        res.setUf(rs.getString("uf"));
-	        res.setEstado(rs.getString("estado"));
+	        res = new Situacao();
+	        res.setCodigo(rs.getInt("codigo"));
+	        res.setTipo(rs.getString("Tipo"));
 	      }
 	    } catch (SQLException ex)
 	    {
-	      Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+	      Logger.getLogger(SituacaoDAO.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    finally
 	    {
